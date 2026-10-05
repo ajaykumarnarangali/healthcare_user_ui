@@ -1,11 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import PatientHeader from '../components/PatientHeader';
 import PatientSidebar from '../components/PatientSidebar';
 
 function PatientLayout() {
     return (
         <div>
-            <PatientHeader />
             <div>
                 <div>
                     <PatientSidebar />

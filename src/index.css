@@ -1,3 +1,98 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1a5276;
+  --primary-dark: #154360;
+  --primary-light: #d6eaf8;
+
+  --teal: #0e8470;
+  --teal-light: #d1f2eb;
+
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --border: #dde1e7;
+
+  --text: #1c2833;
+  --text-muted: #5d6d7e;
+  --text-light: #a9b4be;
+
+  --success: #1e8449;
+  --success-bg: #d5f5e3;
+
+  --warning: #b7770d;
+  --warning-bg: #fef9e7;
+
+  --error: #c0392b;
+  --error-bg: #fdedec;
+
+}
+
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.transition-sidebar {
+  transition: transform 0.25s ease, width 0.25s ease;
+}
