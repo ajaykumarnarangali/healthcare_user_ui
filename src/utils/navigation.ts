@@ -191,8 +191,8 @@ export const getPatientSidebarData = (): PatientSidebarGroup[] => [
             },
             {
                 id: 'chat',
-                label: 'Messages',
-                path: '/patient/messages',
+                label: 'Chat',
+                path: '/patient/chat',
                 Icon: IconMessageSquare,
             },
             {
