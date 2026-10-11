@@ -13,18 +13,18 @@ function LoginForm() {
                 </p>
             </div>
 
-            <div className="mt-2 flex flex-col gap-1">
+            <div className="mt-2 flex flex-col gap-1.5">
                 <label className="text-xs font-semibold uppercase text-text-muted sm:text-[13px]">
                     Email address
                 </label>
                 <input
                     type="email"
                     placeholder="your@email.com"
-                    className="h-11 w-full rounded-lg border border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
+                    className="h-11 w-full rounded-lg border placeholder:text-[13px] border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
                 />
             </div>
 
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between gap-2">
                     <label className="text-xs font-semibold uppercase text-text-muted sm:text-[13px]">
                         Password
@@ -39,7 +39,7 @@ function LoginForm() {
                 <input
                     type="password"
                     placeholder="Enter your password"
-                    className="h-11 w-full rounded-lg border border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
+                    className="h-11 w-full rounded-lg border placeholder:text-[13px] border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
                 />
             </div>
 

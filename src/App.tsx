@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from "./features/auth/pages/LoginPage";
-import ProtectedRoute from "./routes/ProtectedRoute";
 import { Fragment } from "react/jsx-runtime";
+
+import LoginPage from "./features/auth/pages/LoginPage";
+import RegisterPage from "./features/auth/pages/RegisterPage";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
 
@@ -10,6 +12,10 @@ function App() {
       {
         path: "/",
         element: <LoginPage />,
+      },
+      {
+        path: '/register',
+        element: <RegisterPage />
       },
       {
         path: "/doctor",
