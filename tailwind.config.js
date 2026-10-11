@@ -7,6 +7,9 @@ export default {
 
   theme: {
     extend: {
+      fontFamily: {
+        inter: ["Inter", "system-ui", "sans-serif"],
+      },
       colors: {
         primary: {
           DEFAULT: "var(--primary)",
