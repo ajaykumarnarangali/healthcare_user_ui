@@ -1,11 +1,35 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useRegister } from "../hooks/useRegister";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { RegisterData } from "../types/auth.types";
+import {
+    patientRegisterSchema,
+    doctorRegisterSchema,
+} from "../schemas/auth.schema";
+
 
 function RegisterForm() {
-    const [role, setRole] = useState<"patient" | "doctor">("patient");
+
+    const { role, setRole, register } = useRegister();
+    const isDoctor = role === "doctor";
+
+    const {
+        register: registerField,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<RegisterData>({
+        resolver: zodResolver(
+            isDoctor ? doctorRegisterSchema : patientRegisterSchema
+        ),
+    });
 
     return (
-        <form className="flex w-full max-w-[440px] flex-col gap-4 rounded-xl bg-card p-5 shadow sm:p-6 md:p-8 font-inter">
+        <form
+            className="flex w-full max-w-[440px] flex-col gap-4 rounded-xl 
+        bg-card p-5 shadow sm:p-6 md:p-8 font-inter"
+            onSubmit={handleSubmit(register)}
+        >
             <div>
                 <h1 className="mb-1 text-xl font-bold leading-7 text-text sm:text-2xl sm:leading-8">
                     Create your account
@@ -23,8 +47,8 @@ function RegisterForm() {
                     onClick={() => setRole("patient")}
                     aria-pressed={role === "patient"}
                     className={`h-10 rounded-md text-sm font-semibold transition-colors ${role === "patient"
-                            ? "bg-primary text-white shadow-sm"
-                            : "text-text-muted hover:bg-white"
+                        ? "bg-primary text-white shadow-sm"
+                        : "text-text-muted hover:bg-white"
                         }`}
                 >
                     Patient
@@ -34,8 +58,8 @@ function RegisterForm() {
                     onClick={() => setRole("doctor")}
                     aria-pressed={role === "doctor"}
                     className={`h-10 rounded-md text-sm font-semibold transition-colors ${role === "doctor"
-                            ? "bg-primary text-white shadow-sm"
-                            : "text-text-muted hover:bg-white"
+                        ? "bg-primary text-white shadow-sm"
+                        : "text-text-muted hover:bg-white"
                         }`}
                 >
                     Doctor
@@ -50,8 +74,11 @@ function RegisterForm() {
                     type="email"
                     placeholder="your@email.com"
                     className="h-11 w-full rounded-lg border placeholder:text-[13px] border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
-                    required
+                    {...registerField("email")}
                 />
+                {errors.email && (
+                    <p className="text-xs text-red-600">{errors.email.message}</p>
+                )}
             </div>
 
             {role === "doctor" && (
@@ -63,8 +90,13 @@ function RegisterForm() {
                         type="text"
                         placeholder="Enter your medical licence number"
                         className="h-11 w-full rounded-lg border placeholder:text-[13px] border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
-                        required
+                        {...registerField("licenseNumber")}
                     />
+                    {errors.licenseNumber && (
+                        <p className="text-xs text-red-600">
+                            {errors.licenseNumber.message}
+                        </p>
+                    )}
                 </div>
             )}
 
@@ -78,8 +110,13 @@ function RegisterForm() {
                     type="password"
                     placeholder="Enter your password"
                     className="h-11 w-full rounded-lg border placeholder:text-[13px] border-border bg-white px-3 text-sm outline-none focus:outline-0 focus:ring-0 sm:text-base"
-                    required
+                    {...registerField("password")}
                 />
+                {errors.password && (
+                    <p className="text-xs text-red-600">
+                        {errors.password.message}
+                    </p>
+                )}
             </div>
 
             <button
@@ -92,7 +129,7 @@ function RegisterForm() {
             <div className="mt-2 flex flex-wrap justify-center text-xs text-text-muted sm:text-sm">
                 Already have an account?
                 <Link
-                    to="/login"
+                    to="/"
                     className="ps-1 font-semibold text-[#1A5276]"
                 >
                     Sign In
