@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
+import { Toaster } from "sonner"
 
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <Fragment>
+      <Toaster position="top-right" richColors />
       <RouterProvider router={router} />
     </Fragment>
   )

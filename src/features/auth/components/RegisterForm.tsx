@@ -11,13 +11,14 @@ import {
 
 function RegisterForm() {
 
-    const { role, setRole, register } = useRegister();
+    const { role, setRole, register, isLoading, error } = useRegister();
     const isDoctor = role === "doctor";
 
     const {
-        register: registerField,
+        reset,
         handleSubmit,
         formState: { errors },
+        register: registerField,
     } = useForm<RegisterData>({
         resolver: zodResolver(
             isDoctor ? doctorRegisterSchema : patientRegisterSchema
@@ -28,7 +29,7 @@ function RegisterForm() {
         <form
             className="flex w-full max-w-[440px] flex-col gap-4 rounded-xl 
         bg-card p-5 shadow sm:p-6 md:p-8 font-inter"
-            onSubmit={handleSubmit(register)}
+            onSubmit={handleSubmit((data) => register(data, reset))}
         >
             <div>
                 <h1 className="mb-1 text-xl font-bold leading-7 text-text sm:text-2xl sm:leading-8">
@@ -119,11 +120,18 @@ function RegisterForm() {
                 )}
             </div>
 
+            {error && (
+                <p role="alert" className="text-sm text-red-600">
+                    {error}
+                </p>
+            )}
+
             <button
-                className="mt-1 h-11 w-full rounded-lg bg-primary text-sm font-semibold text-white sm:text-base"
+                className="mt-1 h-11 w-full rounded-lg bg-primary text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
                 type="submit"
+                disabled={isLoading}
             >
-                Create account
+                {isLoading ? "Creating account..." : "Create account"}
             </button>
 
             <div className="mt-2 flex flex-wrap justify-center text-xs text-text-muted sm:text-sm">
