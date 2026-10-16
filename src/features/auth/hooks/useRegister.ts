@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import type { UseFormReset } from "react-hook-form";
 import type { RegisterData, userRoles } from "../types/auth.types";
 import { getApiErrorMessage } from "../../../utils/getApiErrorMessage";
@@ -10,6 +11,8 @@ export function useRegister() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [role, setRole] = useState<userRoles>("patient");
+
+    const navigate = useNavigate();
 
     const register = async (data: RegisterData, reset: UseFormReset<RegisterData>) => {
         setIsLoading(true);
@@ -32,6 +35,7 @@ export function useRegister() {
             toast.success(res.message);
             if (res.success) {
                 reset();
+                navigate("/verify-email");
             }
         } catch (err: unknown) {
             let message = getApiErrorMessage(err);

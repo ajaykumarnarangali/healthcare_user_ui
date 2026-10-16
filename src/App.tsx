@@ -4,6 +4,7 @@ import { Toaster } from "sonner"
 
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
+import VerifyEmailPage from "./features/auth/pages/VerifyEmailPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
       {
         path: '/register',
         element: <RegisterPage />
+      },
+      {
+        path: "/verify-email",
+        element: <VerifyEmailPage />,
       },
       {
         path: "/doctor",
