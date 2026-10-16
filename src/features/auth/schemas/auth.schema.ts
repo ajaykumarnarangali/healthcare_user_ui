@@ -30,6 +30,8 @@ export const doctorRegisterSchema = baseRegisterSchema.extend({
         .min(1, "Licence number is required"),
 });
 
+export const loginSchema = baseRegisterSchema;
+
 export const verifyEmailSchema = zod.object({
     password: zod
         .string()
@@ -46,4 +48,5 @@ export const verifyEmailSchema = zod.object({
 
 export type PatientRegisterData = zod.infer<typeof patientRegisterSchema>;
 export type DoctorRegisterData = zod.infer<typeof doctorRegisterSchema>;
+export type LoginData = zod.infer<typeof loginSchema>;
 export type VerifyEmailData = zod.infer<typeof verifyEmailSchema>;

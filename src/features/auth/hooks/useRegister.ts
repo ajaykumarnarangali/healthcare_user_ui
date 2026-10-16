@@ -32,8 +32,8 @@ export function useRegister() {
                     password: data.password,
                 });
             }
-            toast.success(res.message);
             if (res.success) {
+                toast.success(res.message);
                 reset();
                 navigate("/verify-email");
             }

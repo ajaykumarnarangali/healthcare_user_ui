@@ -6,6 +6,12 @@ export type RegisterData = {
     licenseNumber?: string
 }
 
+export type LoginData = {
+    email: string,
+    password: string,
+    licenseNumber?: string
+}
+
 export type VerifyEmailQuery = {
     token: string;
     userId: string;

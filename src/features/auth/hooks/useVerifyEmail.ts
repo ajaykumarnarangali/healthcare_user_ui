@@ -34,8 +34,8 @@ export function useVerifyEmail() {
 
         try {
             let res = await verifyEmail(data, query);
-            toast.success(res.message);
             if (res.success) {
+                toast.success(res.message);
                 reset();
                 navigate("/");
             }
