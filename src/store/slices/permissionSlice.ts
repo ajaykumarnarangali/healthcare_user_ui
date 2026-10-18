@@ -10,7 +10,7 @@ const permissionSlice = createSlice({
     initialState,
     reducers: {
         setPermissions: (state, action) => {
-            state.permissions = action.payload;
+            state.permissions = action.payload.permissions;
         },
 
         clearPermissions: (state) => {

@@ -10,7 +10,7 @@ export function useRegister() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [role, setRole] = useState<userRoles>("patient");
+    const [role, setRole] = useState<userRoles>("PATIENT");
 
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export function useRegister() {
 
         try {
             let res: any;
-            if (role === "doctor") {
+            if (role === "DOCTOR") {
                 res = await registerDoctor({
                     email: data.email,
                     password: data.password,

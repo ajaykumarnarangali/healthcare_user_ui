@@ -1,4 +1,9 @@
-export type userRoles = "patient" | "doctor";
+export type userRoles = "PATIENT" | "DOCTOR";
+
+export const roleRoutes: Record<userRoles, string> = {
+    PATIENT: "/patient/dashboard",
+    DOCTOR: "/doctor/dashboard",
+};
 
 export type RegisterData = {
     email: string,

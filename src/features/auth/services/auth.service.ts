@@ -1,5 +1,5 @@
 import { api } from "../../../services/api";
-import type { PatientRegisterData, DoctorRegisterData, VerifyEmailData } from "../schemas/auth.schema";
+import type { PatientRegisterData, DoctorRegisterData, VerifyEmailData, LoginData } from "../schemas/auth.schema";
 import type { VerifyEmailQuery } from "../types/auth.types";
 
 export async function registerPatient(payload: PatientRegisterData) {
@@ -21,6 +21,14 @@ export async function registerDoctor(payload: DoctorRegisterData) {
 export async function verifyEmail(data: VerifyEmailData, query: VerifyEmailQuery) {
     const response = await api.post("/auth/verify-email", data, {
         params: query,
+        requiresAuth: false,
+    });
+
+    return response.data;
+}
+
+export async function loginUser(data: LoginData) {
+    const response = await api.post("/auth/login", data, {
         requiresAuth: false,
     });
 

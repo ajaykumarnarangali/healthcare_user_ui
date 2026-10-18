@@ -12,7 +12,7 @@ import {
 function RegisterForm() {
 
     const { role, setRole, register, isLoading, error } = useRegister();
-    const isDoctor = role === "doctor";
+    const isDoctor = role === "DOCTOR";
 
     const {
         reset,
@@ -36,7 +36,7 @@ function RegisterForm() {
                     Create your account
                 </h1>
                 <p className="text-xs text-text-muted sm:text-sm">
-                    {role === "patient"
+                    {role === "PATIENT"
                         ? "Register as a patient to book appointments and manage your healthcare."
                         : "Register as a doctor to create your professional account."}
                 </p>
@@ -45,9 +45,9 @@ function RegisterForm() {
             <div className="mt-1 grid grid-cols-2 gap-1 rounded-lg border border-border bg-[#f0f4f8] p-1">
                 <button
                     type="button"
-                    onClick={() => setRole("patient")}
-                    aria-pressed={role === "patient"}
-                    className={`h-10 rounded-md text-sm font-semibold transition-colors ${role === "patient"
+                    onClick={() => setRole("PATIENT")}
+                    aria-pressed={role === "PATIENT"}
+                    className={`h-10 rounded-md text-sm font-semibold transition-colors ${role === "PATIENT"
                         ? "bg-primary text-white shadow-sm"
                         : "text-text-muted hover:bg-white"
                         }`}
@@ -56,9 +56,9 @@ function RegisterForm() {
                 </button>
                 <button
                     type="button"
-                    onClick={() => setRole("doctor")}
-                    aria-pressed={role === "doctor"}
-                    className={`h-10 rounded-md text-sm font-semibold transition-colors ${role === "doctor"
+                    onClick={() => setRole("DOCTOR")}
+                    aria-pressed={role === "DOCTOR"}
+                    className={`h-10 rounded-md text-sm font-semibold transition-colors ${role === "DOCTOR"
                         ? "bg-primary text-white shadow-sm"
                         : "text-text-muted hover:bg-white"
                         }`}
@@ -82,7 +82,7 @@ function RegisterForm() {
                 )}
             </div>
 
-            {role === "doctor" && (
+            {role === "DOCTOR" && (
                 <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-semibold uppercase text-text-muted sm:text-[13px]">
                         Medical licence number
