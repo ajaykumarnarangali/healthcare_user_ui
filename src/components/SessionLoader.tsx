@@ -12,7 +12,7 @@ function SessionLoader() {
                     <div className="absolute inset-0 animate-pulse rounded-2xl bg-[#1A5276]/10" />
 
                     <svg
-                        className="relative h-9 w-9 animate-pulse"
+                        className="relative h-7 w-7 animate-pulse"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="#1A5276"

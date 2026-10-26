@@ -34,3 +34,16 @@ export async function loginUser(data: LoginData) {
 
     return response.data;
 }
+
+export async function refreshToken() {
+    const response = await api.post("/auth/refresh", {}, {
+        requiresAuth: false,
+    });
+
+    return response.data;
+}
+
+export async function getCurrentUser() {
+    const response = await api.get("/auth/me");
+    return response.data;
+}
