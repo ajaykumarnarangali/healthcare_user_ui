@@ -4,6 +4,7 @@ import { refreshToken, getCurrentUser } from "../services/auth.service";
 import {
     logout,
     setUser,
+    setAccessToken,
     setCredentials,
     setPermissions,
     setAuthLoading,
@@ -26,9 +27,8 @@ export function useAuthInit() {
                 dispatch(logout());
                 return;
             }
-            dispatch(setCredentials({
-                accessToken: refreshRes.data.accessToken,
-                userId: null,
+            dispatch(setAccessToken({
+                accessToken: refreshRes.data.accessToken
             }));
 
             const userRes = await getCurrentUser();

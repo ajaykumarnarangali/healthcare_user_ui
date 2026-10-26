@@ -1,6 +1,7 @@
 export {
     logout,
     setCredentials,
+    setAccessToken,
     setAuthLoading,
     setAuthenticated
 } from "./authSlice";
