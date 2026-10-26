@@ -7,6 +7,7 @@ import RegisterPage from "./features/auth/pages/RegisterPage";
 import VerifyEmailPage from "./features/auth/pages/VerifyEmailPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
+import NotFoundPage from "./components/NotFound";
 
 function App() {
 
@@ -38,6 +39,10 @@ function App() {
         path: "/patient",
         id: "patient",
         element: <ProtectedRoute allowedRole="PATIENT" />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />
       },
     ],
     {
