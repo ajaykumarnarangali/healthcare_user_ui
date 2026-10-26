@@ -6,22 +6,28 @@ import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import VerifyEmailPage from "./features/auth/pages/VerifyEmailPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 
 function App() {
 
   const router = createBrowserRouter(
     [
       {
-        path: "/",
-        element: <LoginPage />,
-      },
-      {
-        path: '/register',
-        element: <RegisterPage />
-      },
-      {
-        path: "/verify-email",
-        element: <VerifyEmailPage />,
+        element: <PublicOnlyRoute />,
+        children: [
+          {
+            path: "/",
+            element: <LoginPage />,
+          },
+          {
+            path: "/register",
+            element: <RegisterPage />,
+          },
+          {
+            path: "/verify-email",
+            element: <VerifyEmailPage />,
+          },
+        ],
       },
       {
         path: "/doctor",
