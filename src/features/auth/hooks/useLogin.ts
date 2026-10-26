@@ -6,7 +6,7 @@ import { loginUser } from "../services/auth.service";
 import { type LoginData } from "../schemas/auth.schema";
 import { roleRoutes } from "../types/auth.types";
 import { useAppDispatch } from "../../../hooks/useAppDispatch ";
-import { setCredentials, setPermissions, setUser } from "../../../store/slices"
+import { setCredentials, setPermissions, setUser, setAuthLoading, setAuthenticated } from "../../../store/slices"
 import { getApiErrorMessage } from "../../../utils/getApiErrorMessage";
 
 export function useLogin() {
@@ -45,6 +45,9 @@ export function useLogin() {
                     name: null,
                     profileImage: null,
                 }));
+
+                dispatch(setAuthenticated(true));
+                dispatch(setAuthLoading(false));
                 reset();
 
                 navigate(roleRoutes[data.user.role]);

@@ -15,3 +15,11 @@ export type UserState = {
 export type PermissionState = {
     permissions: string[];
 }
+
+type Role =
+    | "PATIENT"
+    | "DOCTOR";
+
+export interface ProtectedRouteProps {
+    allowedRole: Role;
+}

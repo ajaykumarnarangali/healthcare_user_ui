@@ -1,7 +1,8 @@
 export {
-    setLoading,
-    setCredentials,
     logout,
+    setCredentials,
+    setAuthLoading,
+    setAuthenticated
 } from "./authSlice";
 
 export {

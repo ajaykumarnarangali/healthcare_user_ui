@@ -26,12 +26,12 @@ function App() {
       {
         path: "/doctor",
         id: "doctor",
-        element: <ProtectedRoute />,
+        element: <ProtectedRoute allowedRole="DOCTOR" />,
       },
       {
         path: "/patient",
         id: "patient",
-        element: <ProtectedRoute />,
+        element: <ProtectedRoute allowedRole="PATIENT" />,
       },
     ],
     {
