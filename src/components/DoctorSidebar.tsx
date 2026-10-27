@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { IconLogout } from "../components/Icons";
 import { getPermittedSidebarGroups } from "../utils/navigation";
+import { useAppSelector } from "../hooks/userAppSelector";
 
 function DoctorSidebar() {
 
     const permittedSidebarData = getPermittedSidebarGroups("DOCTOR");
+    const user = useAppSelector((state) => state.user);
 
     return (
         <div className="flex h-full w-full flex-col bg-primary">
@@ -88,7 +90,7 @@ function DoctorSidebar() {
                     </div>
                     <div>
                         <div className="font-inter font-semibold text-sm text-white">
-                            MediConnect
+                            {user?.name ?? "Your Name"}
                         </div>
                         <div className="text-[11px] font-inter text-white/[0.55]">
                             Doctor

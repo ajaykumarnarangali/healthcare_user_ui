@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import DoctorSiderBar from '../components/DoctorSidebar';
+import DoctorHeader from '../components/DoctorHeader';
 
 function DoctorLayout() {
     return (
@@ -9,6 +10,7 @@ function DoctorLayout() {
                     <DoctorSiderBar />
                 </aside>
                 <main className="flex-1 min-w-0">
+                    <DoctorHeader />
                     <Outlet />
                 </main>
             </div>
