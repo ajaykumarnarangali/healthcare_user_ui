@@ -1,6 +1,11 @@
 import type { ComponentType } from 'react';
+import type { DoctorPermission, PatientPermission } from './auth';
 
-type IconProps = { size?: number; className?: string; style?: React.CSSProperties };
+type IconProps = {
+    size?: number;
+    className?: string;
+    style?: React.CSSProperties;
+};
 
 type DoctorAppSection =
     | 'dashboard'
@@ -22,6 +27,7 @@ type DoctorSidebarItem = {
     label: string;
     path: string;
     Icon: ComponentType<IconProps>;
+    permission?: DoctorPermission;
     badge?: number;
 };
 
@@ -47,6 +53,7 @@ type PatientSidebarItem = {
     label: string;
     path: string;
     Icon: ComponentType<IconProps>;
+    permission?: PatientPermission;
     badge?: number;
 };
 

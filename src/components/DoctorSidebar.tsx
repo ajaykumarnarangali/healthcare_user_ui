@@ -1,6 +1,11 @@
+import { NavLink } from "react-router-dom";
 import { IconLogout } from "../components/Icons";
+import { getPermittedSidebarGroups } from "../utils/navigation";
 
 function DoctorSidebar() {
+
+    const permittedSidebarData = getPermittedSidebarGroups("DOCTOR");
+
     return (
         <div className="flex h-full w-full flex-col bg-primary">
             {/* Sidebar Header */}
@@ -32,8 +37,43 @@ function DoctorSidebar() {
             </div>
 
             {/* Middle - Scrollable */}
-            <div className="min-h-0 flex-1 overflow-y-auto">
-                {/* Sidebar navigation items */}
+            <div className="sidebar-scrollbar min-h-0 flex-1 overflow-y-auto p-3 flex flex-col gap-5">
+                {permittedSidebarData.map((group) => (
+                    <div key={group.label}>
+                        <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                            {group.label}
+                        </div>
+
+                        <div className="flex flex-col">
+                            {(group.items ?? []).map((item) => (
+                                <NavLink
+                                    key={item.path}
+                                    to={item.path}
+                                    className={({ isActive }) =>
+                                        `relative flex items-center gap-3 rounded-md py-2.5 px-3 transition-colors ${isActive
+                                            ? "bg-white/15 text-white"
+                                            : "text-sky-100/75 hover:bg-white/10"
+                                        }`
+                                    }
+                                >
+                                    {({ isActive }) => (
+                                        <>
+                                            {isActive && (
+                                                <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-[2px] bg-sky-400 rounded-r" />
+                                            )}
+
+                                            <item.Icon
+                                                size={17}
+                                                className={isActive ? "text-white" : "text-sky-200/75"}
+                                            />
+                                            <span className="text-sm">{item.label}</span>
+                                        </>
+                                    )}
+                                </NavLink>
+                            ))}
+                        </div>
+                    </div>
+                ))}
             </div>
 
             {/* Sidebar Footer */}
@@ -51,7 +91,7 @@ function DoctorSidebar() {
                             MediConnect
                         </div>
                         <div className="text-[11px] font-inter text-white/[0.55]">
-                            Patient
+                            Doctor
                         </div>
                     </div>
                 </div>
