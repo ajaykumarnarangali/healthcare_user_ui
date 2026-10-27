@@ -32,7 +32,7 @@ function DoctorSidebar() {
                             MediConnect
                         </div>
                         <div className="text-[11px] font-inter text-white/[0.55]">
-                            Patient Portal
+                            Doctor Portal
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ function DoctorSidebar() {
                             {group.label}
                         </div>
 
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-0.5">
                             {(group.items ?? []).map((item) => (
                                 <NavLink
                                     key={item.path}
