@@ -48,6 +48,7 @@ function App() {
     {
       async patchRoutesOnNavigation({ path, patch }) {
         if (path.startsWith("/doctor")) {
+          console.log("data fetch working");
           const { default: doctorRoutes } =
             await import("./routes/doctorRoutes");
 
