@@ -3,7 +3,10 @@ import { IconLogout } from "../components/Icons";
 import { getPermittedSidebarGroups } from "../utils/navigation";
 import { useAppSelector } from "../hooks/userAppSelector";
 
-function DoctorSidebar() {
+type DoctorSidebarProps = {
+    onNavigate?: () => void;
+};
+function DoctorSidebar({ onNavigate }: DoctorSidebarProps) {
 
     const permittedSidebarData = getPermittedSidebarGroups("DOCTOR");
     const user = useAppSelector((state) => state.user);
@@ -51,6 +54,7 @@ function DoctorSidebar() {
                                 <NavLink
                                     key={item.path}
                                     to={item.path}
+                                    onClick={onNavigate}
                                     className={({ isActive }) =>
                                         `relative flex items-center gap-3 rounded-md py-2.5 px-3 transition-colors ${isActive
                                             ? "bg-white/15 text-white"
