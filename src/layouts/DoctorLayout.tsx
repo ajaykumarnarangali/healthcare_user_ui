@@ -7,7 +7,7 @@ function DoctorLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
-        <div className="min-h-screen w-full">
+        <div className="h-screen w-full overflow-hidden">
             {isSidebarOpen && (
                 <button
                     type="button"
@@ -16,21 +16,26 @@ function DoctorLayout() {
                     className="fixed inset-0 z-40 bg-black/40 lg:hidden"
                 />
             )}
+
             <aside
                 className={`fixed inset-y-0 left-0 z-50 w-60
-                    overflow-y-auto transition-transform duration-300
-                    lg:translate-x-0
-                    ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            overflow-y-auto transition-transform duration-300
+            lg:translate-x-0
+            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <DoctorSiderBar
                     onNavigate={() => setIsSidebarOpen(false)}
                 />
             </aside>
-            <main className="min-w-0 lg:ml-60">
+
+            <main className="h-full min-w-0 flex flex-col lg:ml-60">
                 <DoctorHeader
                     onMenuClick={() => setIsSidebarOpen(true)}
                 />
-                <Outlet />
+
+                <div className="flex-1 min-h-0 overflow-y-auto">
+                    <Outlet />
+                </div>
             </main>
         </div>
     );

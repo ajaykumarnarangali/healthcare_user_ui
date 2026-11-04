@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router-dom";
 import DoctorLayout from "../layouts/DoctorLayout";
 import DoctorDashboard from "../features/dashboard/pages/DoctorDashboard";
+import ProfileManagement from "../features/user/pages/ProfileManagement";
 
 const doctorRoutes: RouteObject[] = [
     {
@@ -52,7 +53,7 @@ const doctorRoutes: RouteObject[] = [
             },
             {
                 path: "profile",
-                element: <div>Doctor My Profile</div>,
+                element: <ProfileManagement />,
             },
             {
                 path: "settings",

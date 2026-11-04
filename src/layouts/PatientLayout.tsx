@@ -7,7 +7,7 @@ function PatientLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
-        <div className="min-h-screen w-full">
+        <div className="h-screen w-full overflow-hidden">
             {/* Mobile overlay */}
             {isSidebarOpen && (
                 <button
@@ -18,22 +18,25 @@ function PatientLayout() {
                 />
             )}
 
-            <div className="min-h-screen">
-                <aside
-                    className={`fixed inset-y-0 left-0 z-50 w-60
-                        overflow-y-auto transition-transform duration-300
-                        lg:translate-x-0
-                        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
-                >
-                    <PatientSidebar onNavigate={() => setIsSidebarOpen(false)} />
-                </aside>
-                <main className="min-w-0 lg:ml-60">
-                    <PatientHeader
-                        onMenuClick={() => setIsSidebarOpen(true)}
-                    />
+            {/* Sidebar */}
+            <aside
+                className={`fixed inset-y-0 left-0 z-50 w-60
+                    overflow-y-auto transition-transform duration-300
+                    lg:translate-x-0
+                    ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            >
+                <PatientSidebar onNavigate={() => setIsSidebarOpen(false)} />
+            </aside>
+
+            <main className="h-full min-w-0 flex flex-col lg:ml-60">
+                <PatientHeader
+                    onMenuClick={() => setIsSidebarOpen(true)}
+                />
+
+                <div className="flex-1 min-h-0 overflow-y-auto">
                     <Outlet />
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
     );
 }
