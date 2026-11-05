@@ -75,16 +75,19 @@ export const profileBaseSchema = z.object({
 
     profilePhoto: z
         .instanceof(FileList)
-        .refine(files => files.length > 0, "Please select an image")
+        .optional()
         .refine(
-            files => ["image/jpeg", "image/png", "image/webp"].includes(files[0]?.type),
+            files =>
+                !files?.length ||
+                ["image/jpeg", "image/png", "image/webp"].includes(files[0].type),
             "Only JPEG, PNG, and WebP images are allowed"
         )
         .refine(
-            files => files[0]?.size <= 2 * 1024 * 1024,
+            files =>
+                !files?.length ||
+                files[0].size <= 2 * 1024 * 1024,
             "Image must be smaller than 2 MB"
         )
-        .optional(),
 
 }).strict();
 
@@ -124,6 +127,20 @@ export function getPatientProfileSchema(isProfileExist: boolean) {
             }
         }
     });
+}
+
+export const ProfileInitialValues = {
+    firstName: "",
+    lastName: "",
+    phone: "",
+    dateOfBirth: "",
+    gender: undefined,
+    streetAddress: "",
+    city: "",
+    state: "",
+    country: "",
+    postalCode: "",
+    profilePhoto: undefined,
 }
 
 export type ProfileFormInput = z.input<typeof profileBaseSchema>;

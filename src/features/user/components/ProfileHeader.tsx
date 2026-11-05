@@ -8,11 +8,13 @@ type ProfileHeaderProps = {
     formManagement: {
         isFormEditable: boolean;
         setFormEditable: React.Dispatch<React.SetStateAction<boolean>>;
+        handleCancel: () => void;
     };
 };
+
 function ProfileHeader({ formManagement }: ProfileHeaderProps) {
 
-    const { isFormEditable, setFormEditable } = formManagement;
+    const { isFormEditable, setFormEditable, handleCancel } = formManagement;
     const user = useAppSelector((state) => state.user);
     const [previewUrl, setPreviewUrl] = useState(null);
 
@@ -54,7 +56,7 @@ function ProfileHeader({ formManagement }: ProfileHeaderProps) {
                                     ${isFormEditable ? "cursor-pointer" : "cursor-default"}`}
                     >
                         <img
-                            src={previewUrl ?? "/path/to/profile-image.jpg"}
+                            src={previewUrl ?? user?.profileImage ?? "/profile_image.png"}
                             alt="Profile"
                             className="w-full h-full object-cover"
                         />
@@ -91,7 +93,7 @@ function ProfileHeader({ formManagement }: ProfileHeaderProps) {
                     <div className="flex gap-2">
                         <button
                             type="button"
-                            onClick={() => setFormEditable(false)}
+                            onClick={handleCancel}
                             className="flex gap-2 text-[13px] text-text border rounded-lg border-[#E1E5EA] items-center px-4 py-[10px]"
                         >
                             Cancel
