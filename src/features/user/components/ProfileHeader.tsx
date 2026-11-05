@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 type ProfileHeaderProps = {
     formManagement: {
         isFormEditable: boolean;
+        isSubmitting: boolean,
         setFormEditable: React.Dispatch<React.SetStateAction<boolean>>;
         handleCancel: () => void;
     };
@@ -14,7 +15,7 @@ type ProfileHeaderProps = {
 
 function ProfileHeader({ formManagement }: ProfileHeaderProps) {
 
-    const { isFormEditable, setFormEditable, handleCancel } = formManagement;
+    const { isFormEditable, setFormEditable, handleCancel, isSubmitting } = formManagement;
     const user = useAppSelector((state) => state.user);
     const [previewUrl, setPreviewUrl] = useState(null);
 
@@ -109,11 +110,21 @@ function ProfileHeader({ formManagement }: ProfileHeaderProps) {
                 ) : (
                     <button
                         type="button"
+                        disabled={isSubmitting}
                         onClick={() => setFormEditable(true)}
-                        className="flex gap-2 text-[13px] font-semibold text-primary border rounded-lg border-primary items-center px-4 py-[10px]"
+                        className="flex gap-2 text-[13px] font-semibold text-primary border rounded-lg border-primary items-center px-4 py-[10px] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        <IconEdit className="w-3 h-3" />
-                        Edit Profile
+                        {isSubmitting ? (
+                            <>
+                                <span className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                                Saving...
+                            </>
+                        ) : (
+                            <>
+                                <IconEdit className="w-3 h-3" />
+                                Edit Profile
+                            </>
+                        )}
                     </button>
                 )}
             </div>

@@ -120,6 +120,8 @@ export function useProfileManagement() {
         setUserProfile,
         handleFormSubmit,
         isLoading,
+        isSubmitting,
+        submitError,
         fetchError
     };
 }
