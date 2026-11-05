@@ -1,29 +1,52 @@
 import { z } from 'zod';
 
-export const createPatientProfileSchema = z.object({
+export const profileBaseSchema = z.object({
     firstName: z.string()
         .trim()
-        .min(1, 'First name is required')
-        .max(100, 'First name must not exceed 100 characters'),
+        .transform((value) => value === "" ? undefined : value)
+        .pipe(
+            z.string()
+                .min(2, 'First name must be at least 2 characters')
+                .max(100, 'First name must not exceed 100 characters')
+                .optional()
+        )
+        .optional(),
 
     lastName: z.string()
         .trim()
-        .max(100, 'Last name must not exceed 100 characters')
+        .transform((value) => value === "" ? undefined : value)
+        .pipe(
+            z.string()
+                .min(2, 'Last name must be at least 2 characters')
+                .max(100, 'Last name must not exceed 100 characters')
+                .optional()
+        )
         .optional(),
 
     phone: z.string()
         .trim()
-        .min(10, 'Phone number must be at least 10 digits')
-        .max(20, 'Phone number must not exceed 20 characters')
-        .regex(/^\+?[0-9]+$/, 'Invalid phone number format'),
+        .transform((value) => value === "" ? undefined : value)
+        .pipe(
+            z.string()
+                .max(20, 'Phone number must not exceed 20 characters')
+                .regex(/^\+?[0-9]+$/, 'Invalid phone number format')
+                .optional()
+        )
+        .optional(),
 
-    dateOfBirth: z.coerce.date({
-        error: 'Please enter a valid date of birth',
-    }),
+    dateOfBirth: z.preprocess(
+        (value) => value === "" ? undefined : value,
+        z.coerce.date({
+            error: 'Please enter a valid date of birth',
+        }).optional()
+    ),
 
-    gender: z.enum(['MALE', 'FEMALE', 'OTHER'], {
-        error: 'Please select a valid gender',
-    }),
+    gender: z.preprocess(
+        (value) => value === "" ? undefined : value,
+        z.enum(['MALE', 'FEMALE', 'OTHER'], {
+            error: 'Please select a valid gender',
+        }).optional()
+    ),
 
     streetAddress: z.string()
         .trim()
@@ -49,13 +72,60 @@ export const createPatientProfileSchema = z.object({
         .trim()
         .max(20, 'Postal code must not exceed 20 characters')
         .optional(),
+
+    profilePhoto: z
+        .instanceof(FileList)
+        .refine(files => files.length > 0, "Please select an image")
+        .refine(
+            files => ["image/jpeg", "image/png", "image/webp"].includes(files[0]?.type),
+            "Only JPEG, PNG, and WebP images are allowed"
+        )
+        .refine(
+            files => files[0]?.size <= 2 * 1024 * 1024,
+            "Image must be smaller than 2 MB"
+        )
+        .optional(),
+
 }).strict();
 
-export const updatePatientProfileSchema =
-    createPatientProfileSchema.partial().strict();
+export function getPatientProfileSchema(isProfileExist: boolean) {
+    return profileBaseSchema.superRefine((data, ctx) => {
+        if (!isProfileExist) {
+            if (!data.firstName) {
+                ctx.addIssue({
+                    code: 'custom',
+                    path: ['firstName'],
+                    message: 'First name is required',
+                });
+            }
 
-export type CreatePatientProfileFormData =
-    z.infer<typeof createPatientProfileSchema>;
+            if (!data.phone) {
+                ctx.addIssue({
+                    code: 'custom',
+                    path: ['phone'],
+                    message: 'Phone number is required',
+                });
+            }
 
-export type UpdatePatientProfileFormData =
-    z.infer<typeof updatePatientProfileSchema>;
+            if (!data.dateOfBirth) {
+                ctx.addIssue({
+                    code: 'custom',
+                    path: ['dateOfBirth'],
+                    message: 'Please enter a valid date of birth',
+                });
+            }
+
+            if (!data.gender) {
+                ctx.addIssue({
+                    code: 'custom',
+                    path: ['gender'],
+                    message: 'Please select a valid gender',
+                });
+            }
+        }
+    });
+}
+
+export type ProfileFormInput = z.input<typeof profileBaseSchema>;
+export type ProfileFormOutput = z.output<typeof profileBaseSchema>;
+
