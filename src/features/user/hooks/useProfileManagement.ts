@@ -73,7 +73,7 @@ export function useProfileManagement() {
 
         try {
             let response;
-
+            setIsSubmitting(true)
             if (isProfileExist) {
                 response = await updateUserProfile(formData);
             } else {

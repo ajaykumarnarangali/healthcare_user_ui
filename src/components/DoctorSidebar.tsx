@@ -90,7 +90,7 @@ function DoctorSidebar({ onNavigate }: DoctorSidebarProps) {
                 <div className="flex mb-2 px-2 items-center gap-[10px]">
                     <div className="flex items-center justify-center">
                         <img
-                            src="https://placehold.co/34x34"
+                            src={user.profileImage ?? "https://placehold.co/34x34"}
                             alt="Profile"
                             className="h-[34px] w-[34px] rounded-full object-cover"
                         />
